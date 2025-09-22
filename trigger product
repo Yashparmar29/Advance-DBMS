@@ -1,0 +1,15 @@
+use emp2;
+create table product(id int,qty int,price double(10,2));
+delimiter //
+create trigger before_qty5
+before insert on product
+for each row
+begin
+	if new.qty > 100 then 
+		set new.qty = 100;
+	end if;
+end //
+delimiter ;
+
+insert into product values(101,248,489);
+
