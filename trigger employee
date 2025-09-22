@@ -1,0 +1,16 @@
+create database emp2;
+use emp;
+create table employee(id int(10),fname varchar(30),lname varchar(30),department varchar(30),salary int(20));
+delimiter //
+create TRIGGER before_employee_insert
+BEFORE insert on employee
+for each row
+begin
+	if new.salary < 30000 then
+		SET new.salary = 30000;
+	end if;
+end //
+delimiter ; 
+
+insert into employee values(102,'parmar','yash','HR',25000);
+
