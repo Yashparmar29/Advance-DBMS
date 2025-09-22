@@ -1,0 +1,13 @@
+delimiter //
+create trigger before_qty_less
+before insert on product
+for each row 
+begin
+	if new.qty <= 100 then
+		set new.qty = 100;
+	end if;
+end //
+delimiter ;
+
+insert into product values(103,'mouse',89,799);
+select * from product;
