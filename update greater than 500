@@ -1,0 +1,13 @@
+delimiter //
+create trigger before_price
+before update on product
+for each row
+begin
+	if new.price > 500 then
+		set new.price = 500;
+	end if;
+end //
+delimiter ;
+
+update product set price = 499 where id = 101;
+select * from product;
