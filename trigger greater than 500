@@ -1,0 +1,14 @@
+create table product(id int,p_name varchar(30),qty int(30),price int(30));
+delimiter //
+create trigger before_show_qty
+before insert on product
+for each row
+begin
+	if new.price < 500 then
+		set new.price = 500;
+	end if;
+end //
+delimiter ;
+
+insert into product values(102,'cpu',500,799);
+select * from product;
