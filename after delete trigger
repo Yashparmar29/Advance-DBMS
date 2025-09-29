@@ -1,0 +1,13 @@
+delimiter //
+create trigger after_employee_delete1
+after delete on employees
+for each row
+begin 
+	insert into archived_employee values(old.emp_id,old.first_name,old.last_name,old.department,old.salary);
+end //
+delimiter ;
+
+delete from employees where emp_id = 105;
+
+select * from archived_employee;
+
