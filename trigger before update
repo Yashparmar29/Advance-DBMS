@@ -1,0 +1,15 @@
+create table archived_employee as select * from employees where 1=0;
+
+delimiter //
+create trigger before_employee_delete
+before delete on employees
+for each row
+begin 
+	insert into archived_employee values(old.emp_id,old.first_name,old.last_name,old.department,old.salary);
+end //
+delimiter ;
+
+delete from employees where emp_id = 102;
+
+select * from archived_employee;
+
