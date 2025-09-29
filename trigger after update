@@ -1,0 +1,15 @@
+delimiter //
+create trigger after_salary_update1
+after update on employees
+for each row
+begin
+	if new.salary < old.salary then
+		insert into employee_log(emp_id,action) values(new.emp_id,concat('salary update from ',old.salary,' to ',new.salary));
+    end if;
+end //
+delimiter ;
+
+update employees set salary = 40000 where emp_id = 102;
+
+select * from employee_log; 
+
