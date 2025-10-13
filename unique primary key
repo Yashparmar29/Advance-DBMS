@@ -1,0 +1,54 @@
+CREATE TABLE Department (
+    dept_id   INT PRIMARY KEY,
+    dept_name VARCHAR(50) UNIQUE NOT NULL
+);
+
+CREATE TABLE Employee (
+    emp_id    INT,
+    emp_name  VARCHAR(50),
+    dept_id   INT
+);
+DELIMITER //
+
+CREATE TRIGGER emp_pk_insert1
+BEFORE INSERT ON Employee
+FOR EACH ROW
+BEGIN
+    -- Not null check
+    IF NEW.emp_id IS NULL THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'emp_id (Primary Key) cannot be NULL';
+    END IF;
+
+    IF (SELECT COUNT(*) FROM Employee WHERE emp_id = NEW.emp_id) > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Duplicate emp_id (Primary Key) not allowed';
+    END IF;
+END //
+
+DELIMITER ;
+
+
+DELIMITER //
+
+CREATE TRIGGER emp_pk_update1
+BEFORE UPDATE ON Employee
+FOR EACH ROW
+BEGIN
+    IF NEW.emp_id IS NULL THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'emp_id (Primary Key) cannot be NULL';
+    END IF;
+
+    IF (SELECT COUNT(*) 
+        FROM Employee 
+        WHERE emp_id = NEW.emp_id 
+        AND emp_id <> OLD.emp_id) > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Duplicate emp_id (Primary Key) not allowed';
+    END IF;
+END //
+
+DELIMITER ;
+insert into employee values(05,'bhatik parmar',01);
+insert into employee values(02,'amar',03);
