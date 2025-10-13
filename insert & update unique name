@@ -1,0 +1,41 @@
+CREATE TABLE Department (
+    dept_id   INT PRIMARY KEY,
+    dept_name VARCHAR(50) UNIQUE NOT NULL
+);
+
+CREATE TABLE Employee (
+    emp_id    INT,
+    emp_name  VARCHAR(50),
+    dept_id   INT
+);
+DELIMITER //
+
+CREATE TRIGGER emp_unique_insert
+BEFORE INSERT ON Employee
+FOR EACH ROW
+BEGIN
+    IF (SELECT COUNT(*) FROM Employee WHERE emp_name = NEW.emp_name) > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'emp_name must be unique';
+    END IF;
+END //
+
+DELIMITER ;
+DELIMITER //
+
+CREATE TRIGGER emp_unique_update
+BEFORE UPDATE ON Employee
+FOR EACH ROW
+BEGIN
+    IF (SELECT COUNT(*) 
+        FROM Employee 
+        WHERE emp_name = NEW.emp_name 
+        AND emp_id <> OLD.emp_id) > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'emp_name must be unique';
+    END IF;
+END//
+
+DELIMITER ;
+insert into employee values(02,'bhavik',03);
+insert into employee values(03,'bhavik',03);
