@@ -1,0 +1,45 @@
+use yash;
+CREATE TABLE Department (
+    dept_id   INT PRIMARY KEY,
+    dept_name VARCHAR(50) UNIQUE NOT NULL
+);
+
+CREATE TABLE Employee (
+    emp_id    INT,
+    emp_name  VARCHAR(50),
+    dept_id   INT
+);
+DELIMITER //
+
+CREATE TRIGGER emp_fk_insert3
+BEFORE INSERT ON Employee
+FOR EACH ROW
+BEGIN
+    IF NEW.dept_id IS NOT NULL THEN
+        IF (SELECT COUNT(*) FROM Department WHERE dept_id = NEW.dept_id) = 0 THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Invalid dept_id: Foreign key violation';
+        END IF;
+    END IF;
+END //
+
+DELIMITER ;
+DELIMITER //
+
+CREATE TRIGGER emp_fk_update3
+BEFORE UPDATE ON Employee
+FOR EACH ROW
+BEGIN
+    IF NEW.dept_id IS NOT NULL THEN
+        IF (SELECT COUNT(*) FROM Department WHERE dept_id = NEW.dept_id) = 0 THEN
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Invalid dept_id: Foreign key violation';
+        END IF;
+    END IF;
+END //
+
+DELIMITER ;
+INSERT INTO Department (dept_id, dept_name)
+VALUES (9, 'DEVELOPMENT');
+INSERT INTO Employee (emp_id, emp_name, dept_id)
+VALUES (9, 'kishan', 2);
