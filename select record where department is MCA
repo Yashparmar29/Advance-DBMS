@@ -1,0 +1,7 @@
+delimiter //
+create procedure sort_values1(in val varchar(20))
+begin
+	select id,ename,dept from emp where dept = 'MCA';
+end //
+delimiter ;
+call sort_values1('MCA');
