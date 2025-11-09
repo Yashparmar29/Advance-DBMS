@@ -1,0 +1,17 @@
+create table employee(id int(20)primary key,ename varchar(20),salary double(20,5));
+delimiter //
+create trigger less_salary1
+before insert on employee
+for each row
+begin
+	declare ex int;
+    select count(*) into ex from employee
+    where salary > 45000;
+		 if ex > 0 then
+         signal sqlstate '45000'
+         set message_text = 'salary is less then 45000';
+         end if;
+end // 
+delimiter ;
+insert into employee values(03,'yash',67000);
+insert into employee values(04,'bhavik',44000);
