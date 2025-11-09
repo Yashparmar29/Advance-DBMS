@@ -1,0 +1,11 @@
+create database employee;
+use employee;
+create table emp(id int(20)primary key,ename varchar(20),dept varchar(20));
+delimiter //
+create procedure update_data_emp1(in empid int(10),empname varchar(30),empdept varchar(29))
+begin
+	update emp set ename = empname , dept = empdept where id = empid;
+end //
+delimiter ;
+call update_data_emp1(02,'yash parmar','MCA');
+select * from emp;
