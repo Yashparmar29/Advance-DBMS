@@ -1,0 +1,15 @@
+delimiter //
+create trigger name_duplicate
+before insert on emp
+for each row
+begin 
+	declare ex int;
+    select count(*) into ex from emp
+    where ename = new.ename;
+		if ex > 0 then
+			signal sqlstate '45000'
+            set message_text = 'duplicate name not allowed'; 
+        end if;
+end //
+delimiter ;
+insert into emp values(09,'yash','MCA');
