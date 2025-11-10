@@ -1,0 +1,15 @@
+delimiter //
+create trigger duplicate_emp
+before insert on emp
+for each row 
+begin
+	declare ex int;
+    select count(*) into ex from emp 
+    where id = new.id;
+    if ex > 0 then
+    signal sqlstate '45000' 
+    set message_text = 'duplicate not allowed';
+    end if;
+end //
+delimiter ;
+insert into emp values(02,'yash','MCA');
