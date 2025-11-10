@@ -1,0 +1,17 @@
+use employee;
+delimiter //
+create trigger null_value
+before insert on employee
+for each row
+begin
+	declare num int;
+    select count(*) into num from employee
+    where ename = ' ';
+    if num > 0 then
+		signal sqlstate '45000'
+        set message_text = 'employee name and salary is null';
+    end if;
+end //
+delimiter ;
+#insert into employee values(03,'bhautik',0);
+insert into employee values(03,'',69000);
