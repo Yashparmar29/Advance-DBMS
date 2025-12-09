@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompanyProfile id="CMP-2024-88">
+    <BasicInfo>
+        <Name>TechNova Solutions</Name>
+        <Industry>Software Development</Industry>
+        <Founded>2012</Founded>
+        <Website>https://www.technova-example.com</Website>
+    </BasicInfo>
+
+    <ContactInfo>
+        <Email type="primary">contact@technova.com</Email>
+        <Phone type="support">+1 (555) 019-2834</Phone>
+        <Address>
+            <Street>123 Innovation Drive, Suite 400</Street>
+            <City>San Francisco</City>
+            <State>CA</State>
+            <ZipCode>94105</ZipCode>
+            <Country>USA</Country>
+        </Address>
+    </ContactInfo>
+
+    <Departments>
+        <Department id="DEPT-01" name="Engineering">
+            <Head>Sarah Connor</Head>
+            <Budget currency="USD">1500000</Budget>
+            <Employees>
+                <Employee id="EMP-101">
+                    <Name>John Doe</Name>
+                    <Position>Senior Backend Engineer</Position>
+                    <Email>j.doe@technova.com</Email>
+                    <HireDate>2018-05-15</HireDate>
+                </Employee>
+                <Employee id="EMP-102">
+                    <Name>Emily Chen</Name>
+                    <Position>DevOps Specialist</Position>
+                    <Email>e.chen@technova.com</Email>
+                    <HireDate>2020-11-02</HireDate>
+                </Employee>
+            </Employees>
+        </Department>
+
+        <Department id="DEPT-02" name="Human Resources">
+            <Head>Michael Scott</Head>
+            <Budget currency="USD">400000</Budget>
+            <Employees>
+                <Employee id="EMP-201">
+                    <Name>Toby Flenderson</Name>
+                    <Position>HR Representative</Position>
+                    <Email>t.flenderson@technova.com</Email>
+                    <HireDate>2015-02-20</HireDate>
+                </Employee>
+            </Employees>
+        </Department>
+    </Departments>
+
+    <Products>
+        <Product status="Active">
+            <Name>CloudScale API</Name>
+            <Version>2.4.1</Version>
+            <Price currency="USD" type="subscription">99.00</Price>
+        </Product>
+        <Product status="Beta">
+            <Name>SecureVault</Name>
+            <Version>0.9.0</Version>
+            <Price currency="USD" type="one-time">299.00</Price>
+        </Product>
+    </Products>
+</CompanyProfile>
