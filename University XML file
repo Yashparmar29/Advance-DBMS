@@ -1,0 +1,57 @@
+<university>
+  <department>
+    <dept name> Comp. Sci. </dept name>
+    <building> Taylor </building>
+    <budget> 100000 </budget>
+  </department>
+  
+  <department>
+    <dept name> Biology </dept name>
+    <building> Watson </building>
+    <budget> 90000 </budget>
+  </department>
+  <course>
+    <course id> CS-101 </course id>
+    <title> Intro. to Computer Science </title>
+    <dept name> Comp. Sci </dept name>
+    <credits> 4 </credits>
+  </course>
+  <course>
+    <course id> BIO-301 </course id>
+    <title> Genetics </title>
+    <dept name> Biology </dept name>
+    <credits> 4 </credits>
+  </course>
+
+  <instructor>
+    <IID> 10101 </IID>
+    <name> Srinivasan </name>
+    <dept name> Comp. Sci. </dept name>
+    <salary> 65000 </salary>
+  </instructor>
+  <instructor>
+    <IID> 83821 </IID>
+    <name> Brandt </name>
+    <dept name> Comp. Sci. </dept name>
+    <salary> 92000 </salary>
+  </instructor>
+  <instructor>
+    <IID> 76766 </IID>
+    <name> Crick </name>
+    <dept name> Biology </dept name>
+    <salary> 72000 </salary>
+  </instructor>
+
+  <teaches>
+    <IID> 10101 </IID>
+    <course id> CS-101 </course id>
+  </teaches>
+  <teaches>
+    <IID> 83821 </IID>
+    <course id> CS-101 </course id>
+  </teaches>
+  <teaches>
+    <IID> 76766 </IID>
+    <course id> BIO-301 </course id>
+  </teaches>
+</university>
